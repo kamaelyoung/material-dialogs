@@ -2,6 +2,9 @@ apply from: rootProject.file("gradle/versions_plugin_config.gradle")
 
 buildscript {
   apply from: rootProject.file("dependencies.gradle")
+  ext {
+    kotlin_version = '1.3.72'
+  }
 
   repositories {
     google()

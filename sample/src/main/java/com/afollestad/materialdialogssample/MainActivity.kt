@@ -58,20 +58,21 @@ import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import com.afollestad.materialdialogs.list.listItems
 import com.afollestad.materialdialogs.list.listItemsMultiChoice
 import com.afollestad.materialdialogs.list.listItemsSingleChoice
+import com.afollestad.materialdialogs.picker.numberPicker
 
 /** @author Aidan Follestad (afollestad) */
-class MainActivity : AppCompatActivity() {
+class MainActivity: AppCompatActivity() {
   private var debugMode = false
   private lateinit var prefs: SharedPreferences
 
   override fun onCreate(savedInstanceState: Bundle?) {
     prefs = getSharedPreferences(KEY_PREFS, MODE_PRIVATE)
     setTheme(
-        when (prefs.getString(KEY_THEME, LIGHT)) {
-          DARK -> R.style.AppTheme_Dark
-          CUSTOM -> R.style.AppTheme_Custom
-          else -> R.style.AppTheme
-        }
+      when(prefs.getString(KEY_THEME, LIGHT)) {
+        DARK -> R.style.AppTheme_Dark
+        CUSTOM -> R.style.AppTheme_Custom
+        else -> R.style.AppTheme
+      }
     )
     debugMode = prefs.boolean(KEY_DEBUG_MODE, false)
 
@@ -129,7 +130,7 @@ class MainActivity : AppCompatActivity() {
       MaterialDialog(this).show {
         title(R.string.app_name)
         message(R.string.htmlContent) {
-          html { toast("Clicked link: $it") }
+          html {toast("Clicked link: $it")}
           lineSpacing(1.4f)
         }
         positiveButton(R.string.agree)
@@ -168,7 +169,7 @@ class MainActivity : AppCompatActivity() {
         message(R.string.useGoogleLocationServicesPrompt)
         positiveButton(R.string.agree)
         negativeButton(R.string.disagree)
-        checkBoxPrompt(R.string.checkboxConfirm) { checked ->
+        checkBoxPrompt(R.string.checkboxConfirm) {checked ->
           toast("Checked? $checked")
         }
         debugMode(debugMode)
@@ -178,7 +179,7 @@ class MainActivity : AppCompatActivity() {
 
     R.id.list.onClickDebounced {
       MaterialDialog(this).show {
-        listItems(R.array.socialNetworks) { _, index, text ->
+        listItems(R.array.socialNetworks) {_, index, text ->
           toast("Selected item $text at index $index")
         }
         debugMode(debugMode)
@@ -188,7 +189,7 @@ class MainActivity : AppCompatActivity() {
 
     R.id.list_buttons.onClickDebounced {
       MaterialDialog(this).show {
-        listItems(R.array.socialNetworks) { _, index, text ->
+        listItems(R.array.socialNetworks) {_, index, text ->
           toast("Selected item $text at index $index")
         }
         positiveButton(R.string.agree)
@@ -200,7 +201,7 @@ class MainActivity : AppCompatActivity() {
 
     R.id.list_dont_wait_positive.onClickDebounced {
       MaterialDialog(this).show {
-        listItems(R.array.socialNetworks, waitForPositiveButton = false) { _, index, text ->
+        listItems(R.array.socialNetworks, waitForPositiveButton = false) {_, index, text ->
           toast("Selected item $text at index $index")
         }
         negativeButton(android.R.string.cancel)
@@ -212,7 +213,7 @@ class MainActivity : AppCompatActivity() {
     R.id.list_titled.onClickDebounced {
       MaterialDialog(this).show {
         title(R.string.socialNetworks)
-        listItems(R.array.socialNetworks) { _, index, text ->
+        listItems(R.array.socialNetworks) {_, index, text ->
           toast("Selected item $text at index $index")
         }
         debugMode(debugMode)
@@ -223,7 +224,7 @@ class MainActivity : AppCompatActivity() {
     R.id.list_titled_buttons.onClickDebounced {
       MaterialDialog(this).show {
         title(R.string.socialNetworks)
-        listItems(R.array.socialNetworks) { _, index, text ->
+        listItems(R.array.socialNetworks) {_, index, text ->
           toast("Selected item $text at index $index")
         }
         positiveButton(R.string.agree)
@@ -237,7 +238,7 @@ class MainActivity : AppCompatActivity() {
       MaterialDialog(this).show {
         title(R.string.socialNetworks)
         message(R.string.useGoogleLocationServices)
-        listItems(R.array.socialNetworks) { _, index, text ->
+        listItems(R.array.socialNetworks) {_, index, text ->
           toast("Selected item $text at index $index")
         }
         positiveButton(R.string.agree)
@@ -249,7 +250,7 @@ class MainActivity : AppCompatActivity() {
 
     R.id.list_long.onClickDebounced {
       MaterialDialog(this).show {
-        listItems(R.array.states) { _, index, text ->
+        listItems(R.array.states) {_, index, text ->
           toast("Selected item $text at index $index")
         }
         debugMode(debugMode)
@@ -260,7 +261,7 @@ class MainActivity : AppCompatActivity() {
     R.id.list_long_titled.onClickDebounced {
       MaterialDialog(this).show {
         title(R.string.states)
-        listItems(R.array.states) { _, index, text ->
+        listItems(R.array.states) {_, index, text ->
           toast("Selected item $text at index $index")
         }
         debugMode(debugMode)
@@ -271,12 +272,12 @@ class MainActivity : AppCompatActivity() {
     R.id.list_checkPrompt_buttons.onClickDebounced {
       MaterialDialog(this).show {
         title(R.string.socialNetworks)
-        listItems(R.array.socialNetworks_longItems) { _, index, text ->
+        listItems(R.array.socialNetworks_longItems) {_, index, text ->
           toast("Selected item $text at index $index")
         }
         positiveButton(R.string.agree)
         negativeButton(R.string.disagree)
-        checkBoxPrompt(R.string.checkboxConfirm) { checked ->
+        checkBoxPrompt(R.string.checkboxConfirm) {checked ->
           toast("Checked? $checked")
         }
         debugMode(debugMode)
@@ -287,7 +288,7 @@ class MainActivity : AppCompatActivity() {
     R.id.single_choice_titled.onClickDebounced {
       MaterialDialog(this).show {
         title(R.string.socialNetworks)
-        listItemsSingleChoice(R.array.socialNetworks, initialSelection = 1) { _, index, text ->
+        listItemsSingleChoice(R.array.socialNetworks, initialSelection = 1) {_, index, text ->
           toast("Selected item $text at index $index")
         }
         debugMode(debugMode)
@@ -298,7 +299,7 @@ class MainActivity : AppCompatActivity() {
     R.id.single_choice_buttons_titled.onClickDebounced {
       MaterialDialog(this).show {
         title(R.string.socialNetworks)
-        listItemsSingleChoice(R.array.socialNetworks, initialSelection = 2) { _, index, text ->
+        listItemsSingleChoice(R.array.socialNetworks, initialSelection = 2) {_, index, text ->
           toast("Selected item $text at index $index")
         }
         positiveButton(R.string.choose)
@@ -310,7 +311,7 @@ class MainActivity : AppCompatActivity() {
     R.id.single_choice_long_items.onClickDebounced {
       MaterialDialog(this).show {
         title(R.string.socialNetworks)
-        listItemsSingleChoice(R.array.socialNetworks_longItems) { _, index, text ->
+        listItemsSingleChoice(R.array.socialNetworks_longItems) {_, index, text ->
           toast("Selected item $text at index $index")
         }
         positiveButton(R.string.choose)
@@ -323,8 +324,8 @@ class MainActivity : AppCompatActivity() {
       MaterialDialog(this).show {
         title(R.string.socialNetworks)
         listItemsSingleChoice(
-            R.array.socialNetworks, initialSelection = 1, disabledIndices = intArrayOf(1, 3)
-        ) { _, index, text ->
+          R.array.socialNetworks, initialSelection = 1, disabledIndices = intArrayOf(1, 3)
+        ) {_, index, text ->
           toast("Selected item $text at index $index")
         }
         positiveButton(R.string.choose)
@@ -337,8 +338,8 @@ class MainActivity : AppCompatActivity() {
       MaterialDialog(this).show {
         title(R.string.socialNetworks)
         listItemsSingleChoice(
-            R.array.socialNetworks, initialSelection = 1, checkedColor = Color.RED, uncheckedColor = Color.CYAN
-        ) { _, index, text ->
+          R.array.socialNetworks, initialSelection = 1, checkedColor = Color.RED, uncheckedColor = Color.CYAN
+        ) {_, index, text ->
           toast("Selected item $text at index $index")
         }
         positiveButton(R.string.choose)
@@ -351,8 +352,8 @@ class MainActivity : AppCompatActivity() {
       MaterialDialog(this).show {
         title(R.string.socialNetworks)
         listItemsMultiChoice(
-            R.array.socialNetworks, initialSelection = intArrayOf(1, 3)
-        ) { _, indices, text ->
+          R.array.socialNetworks, initialSelection = intArrayOf(1, 3)
+        ) {_, indices, text ->
           toast("Selected items ${text.joinToString()} at indices ${indices.joinToString()}")
         }
         debugMode(debugMode)
@@ -364,8 +365,8 @@ class MainActivity : AppCompatActivity() {
       MaterialDialog(this).show {
         title(R.string.socialNetworks)
         listItemsMultiChoice(
-            R.array.socialNetworks, initialSelection = intArrayOf(1, 3)
-        ) { _, indices, text ->
+          R.array.socialNetworks, initialSelection = intArrayOf(1, 3)
+        ) {_, indices, text ->
           toast("Selected items ${text.joinToString()} at indices ${indices.joinToString()}")
         }
         positiveButton(R.string.choose)
@@ -378,8 +379,8 @@ class MainActivity : AppCompatActivity() {
       MaterialDialog(this).show {
         title(R.string.socialNetworks)
         listItemsMultiChoice(
-            R.array.socialNetworks_longItems, initialSelection = intArrayOf(0, 2)
-        ) { _, indices, text ->
+          R.array.socialNetworks_longItems, initialSelection = intArrayOf(0, 2)
+        ) {_, indices, text ->
           toast("Selected items ${text.joinToString()} at indices ${indices.joinToString()}")
         }
         positiveButton(R.string.choose)
@@ -392,10 +393,10 @@ class MainActivity : AppCompatActivity() {
       MaterialDialog(this).show {
         title(R.string.socialNetworks)
         listItemsMultiChoice(
-            R.array.socialNetworks,
-            initialSelection = intArrayOf(2, 3),
-            disabledIndices = intArrayOf(1, 3)
-        ) { _, indices, text ->
+          R.array.socialNetworks,
+          initialSelection = intArrayOf(2, 3),
+          disabledIndices = intArrayOf(1, 3)
+        ) {_, indices, text ->
           toast("Selected items ${text.joinToString()} at indices ${indices.joinToString()}")
         }
         positiveButton(R.string.choose)
@@ -423,7 +424,7 @@ class MainActivity : AppCompatActivity() {
         positiveButton(text = "Hello World")
         negativeButton(text = "How are you doing?")
         neutralButton(text = "Testing long buttons")
-        checkBoxPrompt(R.string.checkboxConfirm) { checked ->
+        checkBoxPrompt(R.string.checkboxConfirm) {checked ->
           toast("Checked? $checked")
         }
         debugMode(debugMode)
@@ -467,9 +468,9 @@ class MainActivity : AppCompatActivity() {
         message(R.string.useGoogleLocationServicesPrompt)
         positiveButton(R.string.agree)
         negativeButton(R.string.disagree)
-        onShow { toast("onPreShow") }
-        onCancel { toast("onCancel") }
-        onDismiss { toast("onDismiss") }
+        onShow {toast("onPreShow")}
+        onCancel {toast("onCancel")}
+        onDismiss {toast("onDismiss")}
         debugMode(debugMode)
         lifecycleOwner(this@MainActivity)
       }
@@ -479,9 +480,9 @@ class MainActivity : AppCompatActivity() {
       MaterialDialog(this).show {
         title(R.string.useGoogleLocationServices)
         input(
-            hint = "Type something",
-            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_WORDS
-        ) { _, text ->
+          hint = "Type something",
+          inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_WORDS
+        ) {_, text ->
           toast("Input: $text")
         }
         positiveButton(R.string.agree)
@@ -495,10 +496,10 @@ class MainActivity : AppCompatActivity() {
         title(R.string.useGoogleLocationServices)
         message(R.string.useGoogleLocationServicesPrompt)
         input(
-            hint = "Type something",
-            prefill = "Pre-filled!",
-            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_WORDS
-        ) { _, text ->
+          hint = "Type something",
+          prefill = "Pre-filled!",
+          inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_WORDS
+        ) {_, text ->
           toast("Input: $text")
         }
         positiveButton(R.string.agree)
@@ -512,10 +513,10 @@ class MainActivity : AppCompatActivity() {
       MaterialDialog(this).show {
         title(R.string.useGoogleLocationServices)
         input(
-            hint = "Type something",
-            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_WORDS,
-            maxLength = 8
-        ) { _, text ->
+          hint = "Type something",
+          inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_WORDS,
+          maxLength = 8
+        ) {_, text ->
           toast("Input: $text")
         }
         positiveButton(R.string.agree)
@@ -529,14 +530,14 @@ class MainActivity : AppCompatActivity() {
       MaterialDialog(this).show {
         title(R.string.useGoogleLocationServices)
         input(
-            hint = "Type something",
-            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_WORDS
-        ) { _, text ->
+          hint = "Type something",
+          inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_WORDS
+        ) {_, text ->
           toast("Input: $text")
         }
         positiveButton(R.string.agree)
         negativeButton(R.string.disagree)
-        checkBoxPrompt(R.string.checkboxConfirm) { checked ->
+        checkBoxPrompt(R.string.checkboxConfirm) {checked ->
           toast("Checked? $checked")
         }
         debugMode(debugMode)
@@ -544,17 +545,17 @@ class MainActivity : AppCompatActivity() {
       }
     }
 
-    R.id.custom_view.onClickDebounced { showCustomViewDialog() }
+    R.id.custom_view.onClickDebounced {showCustomViewDialog()}
 
-    R.id.custom_view_webview.onClickDebounced { showWebViewDialog() }
+    R.id.custom_view_webview.onClickDebounced {showWebViewDialog()}
 
     R.id.colorChooser_primary.onClickDebounced {
       MaterialDialog(this).show {
         title(R.string.primary_colors)
         colorChooser(
-            ColorPalette.Primary,
-            ColorPalette.PrimarySub
-        ) { _, color ->
+          ColorPalette.Primary,
+          ColorPalette.PrimarySub
+        ) {_, color ->
           toast("Selected color: ${color.toHex()}")
         }
         positiveButton(R.string.select)
@@ -568,9 +569,9 @@ class MainActivity : AppCompatActivity() {
       MaterialDialog(this).show {
         title(R.string.accent_colors)
         colorChooser(
-            ColorPalette.Accent,
-            ColorPalette.AccentSub
-        ) { _, color ->
+          ColorPalette.Accent,
+          ColorPalette.AccentSub
+        ) {_, color ->
           toast("Selected color: ${color.toHex()}")
         }
         positiveButton(R.string.select)
@@ -583,15 +584,15 @@ class MainActivity : AppCompatActivity() {
     R.id.colorChooser_customColors.onClickDebounced {
       val topLevel = intArrayOf(TRANSPARENT, Color.RED, Color.YELLOW, Color.BLUE)
       val subLevel = arrayOf(
-          intArrayOf(Color.WHITE, TRANSPARENT, Color.BLACK),
-          intArrayOf(Color.LTGRAY, Color.GRAY, Color.DKGRAY),
-          intArrayOf(Color.GREEN),
-          intArrayOf(Color.MAGENTA, Color.CYAN)
+        intArrayOf(Color.WHITE, TRANSPARENT, Color.BLACK),
+        intArrayOf(Color.LTGRAY, Color.GRAY, Color.DKGRAY),
+        intArrayOf(Color.GREEN),
+        intArrayOf(Color.MAGENTA, Color.CYAN)
       )
 
       MaterialDialog(this).show {
         title(R.string.custom_colors)
-        colorChooser(topLevel, subLevel) { _, color ->
+        colorChooser(topLevel, subLevel) {_, color ->
           val colorStr =
             if (color == TRANSPARENT) "transparent"
             else color.toHex()
@@ -609,7 +610,7 @@ class MainActivity : AppCompatActivity() {
 
       MaterialDialog(this).show {
         title(R.string.custom_colors)
-        colorChooser(topLevel) { _, color ->
+        colorChooser(topLevel) {_, color ->
           toast("Selected color: ${color.toHex()}")
         }
         positiveButton(R.string.select)
@@ -623,10 +624,10 @@ class MainActivity : AppCompatActivity() {
       MaterialDialog(this).show {
         title(R.string.custom_colors_rgb)
         colorChooser(
-            colors = ColorPalette.Primary,
-            subColors = ColorPalette.PrimarySub,
-            allowCustomArgb = true
-        ) { _, color ->
+          colors = ColorPalette.Primary,
+          subColors = ColorPalette.PrimarySub,
+          allowCustomArgb = true
+        ) {_, color ->
           toast("Selected color: ${color.toHex()}")
         }
         positiveButton(R.string.select)
@@ -640,11 +641,11 @@ class MainActivity : AppCompatActivity() {
       MaterialDialog(this).show {
         title(R.string.custom_colors_argb)
         colorChooser(
-            colors = ColorPalette.Primary,
-            subColors = ColorPalette.PrimarySub,
-            allowCustomArgb = true,
-            showAlphaSelector = true
-        ) { _, color ->
+          colors = ColorPalette.Primary,
+          subColors = ColorPalette.PrimarySub,
+          allowCustomArgb = true,
+          showAlphaSelector = true
+        ) {_, color ->
           toast("Selected color: ${color.toHex()}")
         }
         positiveButton(R.string.select)
@@ -654,19 +655,19 @@ class MainActivity : AppCompatActivity() {
       }
     }
 
-    R.id.file_chooser.onClickDebounced { showFileChooser() }
+    R.id.file_chooser.onClickDebounced {showFileChooser()}
 
-    R.id.file_chooser_buttons.onClickDebounced { showFileChooserButtons() }
+    R.id.file_chooser_buttons.onClickDebounced {showFileChooserButtons()}
 
-    R.id.file_chooser_filter.onClickDebounced { showFileChooserFilter() }
+    R.id.file_chooser_filter.onClickDebounced {showFileChooserFilter()}
 
-    R.id.folder_chooser_buttons.onClickDebounced { showFolderChooserButtons() }
+    R.id.folder_chooser_buttons.onClickDebounced {showFolderChooserButtons()}
 
-    R.id.folder_chooser_filter.onClickDebounced { showFolderChooserFilter() }
+    R.id.folder_chooser_filter.onClickDebounced {showFolderChooserFilter()}
 
     R.id.date_picker.onClickDebounced {
       MaterialDialog(this).show {
-        datePicker { _, date ->
+        datePicker {_, date ->
           toast("Selected date: ${date.formatDate()}")
         }
         debugMode(debugMode)
@@ -677,7 +678,7 @@ class MainActivity : AppCompatActivity() {
     R.id.time_picker.onClickDebounced {
       MaterialDialog(this).show {
         title(text = "Select Time")
-        timePicker { _, time ->
+        timePicker {_, time ->
           toast("Selected time: ${time.formatTime()}")
         }
         debugMode(debugMode)
@@ -688,7 +689,7 @@ class MainActivity : AppCompatActivity() {
     R.id.datetime_picker.onClickDebounced {
       MaterialDialog(this).show {
         title(text = "Select Date and Time")
-        dateTimePicker(requireFutureDateTime = true) { _, dateTime ->
+        dateTimePicker(requireFutureDateTime = true) {_, dateTime ->
           toast("Selected date/time: ${dateTime.formatDateTime()}")
         }
         debugMode(debugMode)
@@ -709,7 +710,7 @@ class MainActivity : AppCompatActivity() {
 
     R.id.bottomsheet_list.onClickDebounced {
       MaterialDialog(this, BottomSheet(WRAP_CONTENT)).show {
-        listItems(R.array.states) { _, index, text ->
+        listItems(R.array.states) {_, index, text ->
           toast("Selected item $text at index $index")
         }
         positiveButton(R.string.agree)
@@ -721,18 +722,18 @@ class MainActivity : AppCompatActivity() {
 
     R.id.bottomsheet_grid.onClickDebounced {
       val items = listOf(
-          BasicGridItem(R.drawable.ic_icon_android, "One"),
-          BasicGridItem(R.drawable.ic_icon_android, "Two"),
-          BasicGridItem(R.drawable.ic_icon_android, "Three"),
-          BasicGridItem(R.drawable.ic_icon_android, "Four"),
-          BasicGridItem(R.drawable.ic_icon_android, "Five"),
-          BasicGridItem(R.drawable.ic_icon_android, "Six"),
-          BasicGridItem(R.drawable.ic_icon_android, "Seven"),
-          BasicGridItem(R.drawable.ic_icon_android, "Eight")
+        BasicGridItem(R.drawable.ic_icon_android, "One"),
+        BasicGridItem(R.drawable.ic_icon_android, "Two"),
+        BasicGridItem(R.drawable.ic_icon_android, "Three"),
+        BasicGridItem(R.drawable.ic_icon_android, "Four"),
+        BasicGridItem(R.drawable.ic_icon_android, "Five"),
+        BasicGridItem(R.drawable.ic_icon_android, "Six"),
+        BasicGridItem(R.drawable.ic_icon_android, "Seven"),
+        BasicGridItem(R.drawable.ic_icon_android, "Eight")
       )
 
       MaterialDialog(this, BottomSheet(WRAP_CONTENT)).show {
-        gridItems(items) { _, index, item ->
+        gridItems(items) {_, index, item ->
           toast("Selected item ${item.title} at index $index")
         }
         positiveButton(R.string.agree)
@@ -750,11 +751,11 @@ class MainActivity : AppCompatActivity() {
       MaterialDialog(this, BottomSheet(WRAP_CONTENT)).show {
         title(R.string.custom_colors_argb)
         colorChooser(
-            colors = ColorPalette.Primary,
-            subColors = ColorPalette.PrimarySub,
-            allowCustomArgb = true,
-            showAlphaSelector = true
-        ) { _, color ->
+          colors = ColorPalette.Primary,
+          subColors = ColorPalette.PrimarySub,
+          allowCustomArgb = true,
+          showAlphaSelector = true
+        ) {_, color ->
           toast("Selected color: ${color.toHex()}")
         }
         positiveButton(R.string.select)
@@ -767,11 +768,22 @@ class MainActivity : AppCompatActivity() {
     R.id.bottomsheet_dateTimePicker.onClickDebounced {
       MaterialDialog(this, BottomSheet(WRAP_CONTENT)).show {
         title(text = "Select Date and Time")
-        dateTimePicker(requireFutureDateTime = true) { _, dateTime ->
+        dateTimePicker(requireFutureDateTime = true) {_, dateTime ->
           toast("Selected date/time: ${dateTime.formatDateTime()}")
         }
         lifecycleOwner(this@MainActivity)
         debugMode(debugMode)
+      }
+    }
+    R.id.numberPicker.onClickDebounced {
+      val item = resources.getStringArray(R.array.socialNetworks)
+      MaterialDialog(this).show {
+        title(R.string.socialNetworks)
+        numberPicker(item, initialSelection = 1) {_, index, text ->
+          toast("Selected item $text at index $index")
+        }
+        debugMode(debugMode)
+        lifecycleOwner(this@MainActivity)
       }
     }
   }
@@ -780,10 +792,10 @@ class MainActivity : AppCompatActivity() {
     val dialog = MaterialDialog(this, dialogBehavior).show {
       title(R.string.googleWifi)
       customView(R.layout.custom_view, scrollable = true, horizontalPadding = true)
-      positiveButton(R.string.connect) { dialog ->
+      positiveButton(R.string.connect) {dialog ->
         // Pull the password out of the custom view when the positive button is pressed
         val passwordInput: EditText = dialog.getCustomView()
-            .findViewById(R.id.password)
+          .findViewById(R.id.password)
         toast("Password: $passwordInput")
       }
       negativeButton(android.R.string.cancel)
@@ -795,11 +807,11 @@ class MainActivity : AppCompatActivity() {
     val customView = dialog.getCustomView()
     val passwordInput: EditText = customView.findViewById(R.id.password)
     val showPasswordCheck: CheckBox = customView.findViewById(R.id.showPassword)
-    showPasswordCheck.setOnCheckedChangeListener { _, isChecked ->
+    showPasswordCheck.setOnCheckedChangeListener {_, isChecked ->
       passwordInput.inputType =
-        if (!isChecked) InputType.TYPE_TEXT_VARIATION_PASSWORD else InputType.TYPE_CLASS_TEXT
+        if (! isChecked) InputType.TYPE_TEXT_VARIATION_PASSWORD else InputType.TYPE_CLASS_TEXT
       passwordInput.transformationMethod =
-        if (!isChecked) PasswordTransformationMethod.getInstance() else null
+        if (! isChecked) PasswordTransformationMethod.getInstance() else null
     }
   }
 
@@ -811,32 +823,32 @@ class MainActivity : AppCompatActivity() {
 
     dialog.onShow {
       val webView: WebView = it.getCustomView()
-          .findViewById(R.id.web_view)
+        .findViewById(R.id.web_view)
       webView.loadData(
-          "<h3>WebView Custom View</h3>\n" +
-              "\n" +
-              "<ol>\n" +
-              "    <li><b>NEW:</b> Hey!</li>\n" +
-              "    <li><b>IMPROVE:</b> Hello!</li>\n" +
-              "    <li><b>FIX:</b> Hi!</li>\n" +
-              "    <li><b>FIX:</b> Hey again!</li>\n" +
-              "    <li><b>FIX:</b> What?</li>\n" +
-              "    <li><b>FIX:</b> This is an example.</li>\n" +
-              "    <li><b>MISC:</b> How are you?</li>\n" +
-              "</ol>\n" +
-              "<p>Material guidelines for dialogs:\n" +
-              "    <a href='http://www.google.com/design/spec/components/dialogs.html'>" +
-              "http://www.google.com/design/spec/components/dialogs.html</a>.\n" +
-              "</p>",
-          "text/html",
-          "UTF-8"
+        "<h3>WebView Custom View</h3>\n" +
+            "\n" +
+            "<ol>\n" +
+            "    <li><b>NEW:</b> Hey!</li>\n" +
+            "    <li><b>IMPROVE:</b> Hello!</li>\n" +
+            "    <li><b>FIX:</b> Hi!</li>\n" +
+            "    <li><b>FIX:</b> Hey again!</li>\n" +
+            "    <li><b>FIX:</b> What?</li>\n" +
+            "    <li><b>FIX:</b> This is an example.</li>\n" +
+            "    <li><b>MISC:</b> How are you?</li>\n" +
+            "</ol>\n" +
+            "<p>Material guidelines for dialogs:\n" +
+            "    <a href='http://www.google.com/design/spec/components/dialogs.html'>" +
+            "http://www.google.com/design/spec/components/dialogs.html</a>.\n" +
+            "</p>",
+        "text/html",
+        "UTF-8"
       )
     }
   }
 
   private fun showFileChooser() = runWithPermissions(READ_EXTERNAL_STORAGE) {
     MaterialDialog(this).show {
-      fileChooser(this@MainActivity) { _, file ->
+      fileChooser(this@MainActivity) {_, file ->
         toast("Selected file: ${file.absolutePath}")
       }
       debugMode(debugMode)
@@ -846,7 +858,7 @@ class MainActivity : AppCompatActivity() {
 
   private fun showFileChooserButtons() = runWithPermissions(WRITE_EXTERNAL_STORAGE) {
     MaterialDialog(this).show {
-      fileChooser(context = this@MainActivity, allowFolderCreation = true) { _, file ->
+      fileChooser(context = this@MainActivity, allowFolderCreation = true) {_, file ->
         toast("Selected file: ${file.absolutePath}")
       }
       negativeButton(android.R.string.cancel)
@@ -858,7 +870,7 @@ class MainActivity : AppCompatActivity() {
 
   private fun showFileChooserFilter() = runWithPermissions(READ_EXTERNAL_STORAGE) {
     MaterialDialog(this).show {
-      fileChooser(context = this@MainActivity, filter = { it.extension == "txt" }) { _, file ->
+      fileChooser(context = this@MainActivity, filter = {it.extension == "txt"}) {_, file ->
         toast("Selected file: ${file.absolutePath}")
       }
       debugMode(debugMode)
@@ -868,7 +880,7 @@ class MainActivity : AppCompatActivity() {
 
   private fun showFolderChooserButtons() = runWithPermissions(WRITE_EXTERNAL_STORAGE) {
     MaterialDialog(this).show {
-      folderChooser(context = this@MainActivity, allowFolderCreation = true) { _, folder ->
+      folderChooser(context = this@MainActivity, allowFolderCreation = true) {_, folder ->
         toast("Selected folder: ${folder.absolutePath}")
       }
       negativeButton(android.R.string.cancel)
@@ -881,7 +893,7 @@ class MainActivity : AppCompatActivity() {
   private fun showFolderChooserFilter() = runWithPermissions(READ_EXTERNAL_STORAGE) {
     MaterialDialog(this).show {
       folderChooser(
-          context = this@MainActivity, filter = { it.name.startsWith("a", true) }) { _, folder ->
+        context = this@MainActivity, filter = {it.name.startsWith("a", true)}) {_, folder ->
         toast("Selected folder: ${folder.absolutePath}")
       }
       debugMode(debugMode)
@@ -894,23 +906,23 @@ class MainActivity : AppCompatActivity() {
     val theme = prefs.getString(KEY_THEME, LIGHT)
     if (theme == LIGHT) {
       menu.findItem(R.id.light_theme)
-          .isChecked = true
+        .isChecked = true
     }
     if (theme == DARK) {
       menu.findItem(R.id.dark_theme)
-          .isChecked = true
+        .isChecked = true
     }
     if (theme == CUSTOM) {
       menu.findItem(R.id.custom_theme)
-          .isChecked = true
+        .isChecked = true
     }
     menu.findItem(R.id.debug_mode)
-        .isChecked = debugMode
+      .isChecked = debugMode
     return super.onCreateOptionsMenu(menu)
   }
 
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    when (item.itemId) {
+    when(item.itemId) {
       R.id.light_theme -> {
         prefs.commit {
           putString(KEY_THEME, LIGHT)
@@ -933,7 +945,7 @@ class MainActivity : AppCompatActivity() {
         return true
       }
       R.id.debug_mode -> {
-        debugMode = !debugMode
+        debugMode = ! debugMode
         prefs.commit {
           putBoolean(KEY_DEBUG_MODE, debugMode)
         }
@@ -955,6 +967,6 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun Int.onClickDebounced(click: () -> Unit) {
-    findViewById<Button>(this).onClickDebounced { click() }
+    findViewById<Button>(this).onClickDebounced {click()}
   }
 }

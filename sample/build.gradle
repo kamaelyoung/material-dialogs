@@ -10,6 +10,7 @@ dependencies {
   implementation project(':color')
   implementation project(':datetime')
   implementation project(':bottomsheets')
+  implementation project(':picker')
   implementation project(':lifecycle')
 
   implementation deps.kotlin.stdlib8
