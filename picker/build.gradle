@@ -5,7 +5,7 @@ apply from: rootProject.file("gradle/android_library_config.gradle")
 
 ext {
   GROUPID = "com.afollestad.material-dialogs"   // 组名
-  ARTIFACTID = "number-picker" // 模块名
+  ARTIFACTID = "number_picker" // 模块名
   VERSION = "3.3.0"
 }
 
