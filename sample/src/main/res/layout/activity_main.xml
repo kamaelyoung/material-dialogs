@@ -386,6 +386,10 @@
       android:id="@+id/numberPicker"
       style="@style/SampleButton"
       android:text="Number Picker" />
+    <Button
+      android:id="@+id/timeLengthPicker"
+      style="@style/SampleButton"
+      android:text="Time Length Picker" />
   </LinearLayout>
 
 </ScrollView>

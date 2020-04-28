@@ -59,6 +59,7 @@ import com.afollestad.materialdialogs.list.listItems
 import com.afollestad.materialdialogs.list.listItemsMultiChoice
 import com.afollestad.materialdialogs.list.listItemsSingleChoice
 import com.afollestad.materialdialogs.picker.numberPicker
+import com.afollestad.materialdialogs.picker.timeLength
 
 /** @author Aidan Follestad (afollestad) */
 class MainActivity: AppCompatActivity() {
@@ -782,6 +783,16 @@ class MainActivity: AppCompatActivity() {
         numberPicker(item, initialSelection = 1) {_, index, text ->
           toast("Selected item $text at index $index")
         }
+        debugMode(debugMode)
+        lifecycleOwner(this@MainActivity)
+      }
+    }
+    R.id.timeLengthPicker.onClickDebounced {
+      MaterialDialog(this).show {
+        timeLength(30){dialog, minute ->
+          toast("Selected minute $minute ")
+        }
+
         debugMode(debugMode)
         lifecycleOwner(this@MainActivity)
       }
