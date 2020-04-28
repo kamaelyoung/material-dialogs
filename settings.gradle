@@ -1,2 +1,3 @@
 include ':core', ':sample', ':files', ':color', ':input', ':lifecycle', ':datetime', ':bottomsheets'
 include ':picker'
+include ':datetime2'

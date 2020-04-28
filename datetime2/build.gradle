@@ -1,20 +1,21 @@
 ext.module_group = "com.afollestad.material-dialogs"
-ext.module_name = "picker"
+ext.module_name = "datetime2"
 
 apply from: rootProject.file("gradle/android_library_config.gradle")
 
 ext {
   GROUPID = "com.afollestad.material-dialogs"   // 组名
-  ARTIFACTID = "number-picker" // 模块名
+  ARTIFACTID = "datetime2" // 模块名
   VERSION = "3.3.0"
 }
 
 dependencies {
   api project(':core')
+  api deps.afollestad.date_picker
+  compileOnly deps.androidx.annotations
 
-  implementation deps.google_material
+  implementation deps.afollestad.dots_indicator
   implementation deps.kotlin.stdlib8
 }
-
 // 发布到maven库
 apply from: rootProject.file("maven_publish.gradle")
