@@ -18,4 +18,4 @@ dependencies {
   implementation deps.kotlin.stdlib8
 }
 // 发布到maven库
-apply from: rootProject.file("maven_publish.gradle")
+//apply from: rootProject.file("maven_publish.gradle")
